@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -19,11 +21,13 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('dashboard');
 
+
 // LOGIN
 Route::get('/login', [LoginController::class, 'showLoginForm'])
     ->name('login');
 
 Route::post('/login', [LoginController::class, 'loginUser']);
+
 
 // USERS
 Route::get('/users', [UserController::class, 'index'])
@@ -43,3 +47,14 @@ Route::put('/users/{id}', [UserController::class, 'update'])
 
 Route::delete('/users/{id}', [UserController::class, 'destroy'])
     ->name('users.destroy');
+
+
+// PRODUCT
+Route::get('/product', [ProductController::class, 'index'])
+    ->name('product.index');
+
+Route::get('/product/create', [ProductController::class, 'create'])
+    ->name('product.create');
+
+Route::post('/product', [ProductController::class, 'store'])
+    ->name('product.store');
